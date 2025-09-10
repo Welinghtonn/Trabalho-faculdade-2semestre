@@ -6,12 +6,16 @@
     box-sizing: border-box;
 }
 
+
 header{
     display: flex;
     align-items: center;
     justify-content: space-around;
     height: 100px;
-    background-color: rgba(102, 205, 170, 0.8);
+    background-color: rgba(102, 205, 170, 0.7);
+    position: absolute;
+    width: 100vw;
+    overflow-y: hidden;
 }
 
 
@@ -19,8 +23,7 @@ header{
     width: 290px;
     height: 55px;
     background-color: white;
-        box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 2px;
-
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 2px;
 }
 
 nav{
@@ -54,4 +57,21 @@ nav{
     font-size: 20px;
 
     box-shadow: rgba(0, 0, 0, 0.3) 0px 2.5px 2px;
+}
+
+.bgHome01{
+    height: 99.4vh;
+    width: 100vw;
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(../assets/backgroundHome01.jpg)
+}
+
+.cardBgHome01{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    width: 300px;
+    height: 300px;
+    border-radius: 20px;
+    background-color: white;
 }
