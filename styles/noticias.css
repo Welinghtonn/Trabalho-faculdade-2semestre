@@ -67,3 +67,57 @@ nav p{
 
     cursor: pointer;
 }
+
+.container{
+    max-width: 1024px;
+    width: 100%;
+    margin: 0 auto;
+
+}
+
+.noticias{
+    display: flex;
+    flex-direction: row;
+    padding-top: 200px;
+    gap: 20px;
+}
+
+.news{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-content: center;
+}
+
+.imgNews img{
+    width: 250px;
+    height: 250px;
+    object-fit: contain;
+}
+
+.manchete{
+    font-family: "Montserrat", sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    padding: 10px 0;
+}
+
+.saibaMais{
+    display: flex;
+    font-family: "Montserrat", sans-serif;
+    padding-left: 270px;
+    justify-content: space-between;
+}
+.saibaMais p a{
+    text-decoration: none;
+}
+
+hr{
+    height: 5px;
+    background-color: #39C2C6;
+    border: none;
+    margin: 10px 0;
+}
