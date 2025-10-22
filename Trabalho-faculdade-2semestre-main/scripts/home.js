@@ -2,11 +2,12 @@
 
 async function getDados() {
     try {
-        const resultado = await fetch("https://dummyjson.com/c/091b-d505-4819-a890", {
+        const resultado = await fetch("https://bjd9aof9.api.sanity.io/v2025-10-21/data/query/production?query=*%0A++%5B_type+%3D%3D+%27Valores%27%5D%0A%7B%0A++%22Emoji%22+%3A+Emoji.asset+-%3Eurl%2C%0A++++Titulo%2C%0A++++Texto%0A%7D%0A%0A%0A%0A&perspective=drafts ", {
             method: "GET",
         })
-
+        console.log(resultado)
         const dados = await resultado.json()
+        console.log(dados.result)
 
         const visao = document.getElementById("visao")
         const missao = document.getElementById("missao")
@@ -16,9 +17,9 @@ async function getDados() {
         let missaoText = document.createElement("p")
         let valoresText = document.createElement("p")
 
-        visaoText.innerText = dados[0].visao
-        missaoText.innerText = dados[1].missao
-        valoresText.innerText = dados[2].valores
+        visaoText.innerText = dados.result[0].Texto
+        missaoText.innerText = dados.result[1].Texto
+        valoresText.innerText = dados.result[2].Texto
 
         visaoText.classList.add("titleCardValores")
         missaoText.classList.add("titleCardValores")
@@ -55,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  
+
   document.querySelectorAll('.swiper').forEach(swiperEl => {
     new Swiper(swiperEl, {
       loop: true,
