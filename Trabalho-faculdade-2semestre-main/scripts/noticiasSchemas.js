@@ -55,10 +55,8 @@ async function getNoticias() {
 
       divContainer.append(divSaibaMais, hr);
 
-      // junta tudo
       divPrincipal.append(divContainerNoticia, divContainer);
 
-      // insere no DOM
       containerPrincipal.appendChild(divPrincipal);
     });
   } catch (err) {
@@ -67,3 +65,32 @@ async function getNoticias() {
 }
 
 getNoticias();
+
+async function getPosts() {
+  try {
+    const resultado = await fetch("https://bjd9aof9.api.sanity.io/v2025-10-21/data/query/production?query=*%0A++%5B_type+%3D%3D+%27Publicacoes%27%5D%0A%0A%7B%0A+%22FotosInstagram%22+%3A+FotosInstagram.asset-%3Eurl%0A%7D%0A%0A%0A%0A%0A%0A%0A%0A%0A&perspective=drafts", {
+      method: "GET",
+    });
+
+    const dados = await resultado.json();
+    console.log(dados.result);
+
+    const raiz = document.querySelector(".social-section");
+
+    const grid = document.createElement("div");
+    grid.classList.add("grid-posts");
+
+    dados.result.forEach((item) => {
+      const img = document.createElement("img");
+      img.src = item.FotosInstagram;
+      img.alt = "Publicação Instagram";
+      grid.appendChild(img);
+    });
+
+    raiz.appendChild(grid);
+  } catch (err) {
+    console.error("Erro ao buscar as postagens:", err);
+  }
+}
+
+getPosts();
