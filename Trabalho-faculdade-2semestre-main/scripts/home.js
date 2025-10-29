@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-
+//carrossel
   document.querySelectorAll('.swiper').forEach(swiperEl => {
     new Swiper(swiperEl, {
       loop: true,
@@ -71,3 +71,76 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 });
+
+//Dinamização da seção da história
+
+async function getHistoria() {
+    try {
+        const resultado = await fetch("https://bjd9aof9.api.sanity.io/v2025-10-21/data/query/production?query=*%0A++%5B_type+%3D%3D+%27Historia%27%5D%0A%7B%0A++Titulo%2C%0A++++Texto%2C%0A++++%22Imagem%22+%3A+Imagem.asset-%3Eurl%0A%7D%0A%0A%0A%0A%0A&perspective=drafts", {
+            method: "GET",
+        })
+        console.log(resultado);
+        const dados = await resultado.json();
+
+        console.log(dados.result);
+  const item = (dados && Array.isArray(dados.result) && dados.result[0]) || null;
+    if (!item) {
+      console.warn("Sem conteúdo em Historia.");
+      return;
+    }
+
+    // <section id="historia" class="historia">
+    const section = document.createElement("section");
+    section.id = "historia";
+    section.classList.add("historia");
+
+    const container = document.createElement("div");
+    container.classList.add("historia-container");
+
+    const texto = document.createElement("div");
+    texto.classList.add("historia-texto");
+
+    // Título
+    const h2 = document.createElement("h2");
+    h2.textContent = item.Titulo || "";
+    texto.appendChild(h2);
+
+    // Parágrafos (quebra por ponto, ?, ! — ignora vazios)
+    const frases = (item.Texto || "")
+      .split(/[.!?]+/g)
+      .map(s => s.trim())
+      .filter(Boolean);
+
+    frases.forEach(f => {
+      const p = document.createElement("p");
+      p.textContent = f + ".";
+      texto.appendChild(p);
+    });
+
+    // Imagem
+    const figure = document.createElement("figure");
+    figure.classList.add("historia-imagem");
+    const img = document.createElement("img");
+    img.src = item.Imagem || "";
+    img.alt = item.Titulo || "Imagem da seção história";
+    img.loading = "lazy";
+    figure.appendChild(img);
+
+    container.append(texto, figure);
+    section.appendChild(container);
+
+
+    const mount = document.querySelector("#historia-root");
+    if (mount) {
+      mount.innerHTML = "";
+      mount.appendChild(section);
+    } else {
+      document.body.appendChild(section);
+    }
+
+    } catch (err) {
+        console.error(err);
+    }
+  }
+
+getHistoria();
