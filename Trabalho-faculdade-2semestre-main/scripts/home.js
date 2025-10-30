@@ -1,4 +1,63 @@
+document.addEventListener("DOMContentLoaded", () => {
+  getBanner();
+});
 
+async function getBanner() {
+  try {
+    const url =
+      "https://bjd9aof9.api.sanity.io/v2025-10-21/data/query/production?query=*%5B_type%20%3D%3D%20'Banner'%5D%7BTitulo%2C%20Texto%2C%20'Fundo'%3AFundo.asset-%3Eurl%7D";
+
+    const resp = await fetch(url);
+    if (!resp.ok) throw new Error(`Fetch falhou: ${resp.status} ${resp.statusText}`);
+
+    const { result = [] } = await resp.json();
+    if (!result.length) throw new Error("Nenhum documento 'Banner' encontrado.");
+
+    const { Titulo = "", Texto = "", Fundo = "" } = result[0];
+
+    const containerBanner = document.querySelector(".bgHome01");
+    if (!containerBanner) throw new Error("Elemento .bgHome01 não encontrado no DOM.");
+
+    if (Fundo) {
+      containerBanner.style.backgroundImage =
+        `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('${Fundo}')`;
+      containerBanner.style.backgroundSize = "cover";
+      containerBanner.style.backgroundPosition = "center";
+      containerBanner.style.backgroundRepeat = "no-repeat";
+    }
+
+    let cardBg = containerBanner.querySelector(".cardBgHome01");
+    if (!cardBg) {
+      cardBg = document.createElement("div");
+      cardBg.className = "cardBgHome01";
+      containerBanner.appendChild(cardBg);
+    }
+
+    let tituloEl = cardBg.querySelector(".textTituloCard");
+    if (!tituloEl) {
+      tituloEl = document.createElement("p");
+      tituloEl.className = "textTituloCard";
+    
+      const bar = cardBg.querySelector(".barCard");
+      if (bar) cardBg.insertBefore(tituloEl, bar);
+      else cardBg.appendChild(tituloEl);
+    }
+    tituloEl.textContent = Titulo || " ";
+
+    let textoEl = cardBg.querySelector(".textCard");
+    if (!textoEl) {
+      textoEl = document.createElement("p");
+      textoEl.className = "textCard";
+      const bar = cardBg.querySelector(".barCard");
+      if (bar) cardBg.insertBefore(textoEl, bar.nextSibling); 
+      else cardBg.appendChild(textoEl);
+    }
+    textoEl.textContent = Texto || " ";
+
+  } catch (err) {
+    console.error("Erro em getBanner():", err);
+  }
+}
 
 async function getDados() {
   try {
@@ -7,40 +66,38 @@ async function getDados() {
     const dados = await resultado.json();
     console.log(dados.result);
 
-    const inicio = document.getElementById("inicio");
+    const containerValores = document.querySelector(".containerCardValores");
 
-    const visao = document.getElementById("visao");
-    const missao = document.getElementById("missao");
-    const valores = document.getElementById("valores");
+    dados.result.forEach(item => {
+      const card = document.createElement("div");
+      card.classList.add("cardsValores");
 
-    // PREENCHE ÍCONES / IMAGENS
-    visao.querySelector("img").src = dados.result[0].Emoji;
-    missao.querySelector("img").src = dados.result[1].Emoji;
-    valores.querySelector("img").src = dados.result[2].Emoji;
+      const emoji = document.createElement("img");
+      emoji.src = item.Emoji;
+      emoji.alt = item.Titulo;
+      emoji.classList.add("iconsCardValores");
 
-    // PREENCHE TEXTOS
-    const visaoText = document.createElement("p");
-    const missaoText = document.createElement("p");
-    const valoresText = document.createElement("p");
+      const title = document.createElement("p");
+      title.classList.add("visao");
+      title.textContent = item.Titulo;
 
-    visaoText.textContent = dados.result[0].Texto;
-    missaoText.textContent = dados.result[1].Texto;
-    valoresText.textContent = dados.result[2].Texto;
+      const line = document.createElement("div");
+      line.classList.add("lineCardValores");
 
-    visaoText.classList.add("titleCardValores");
-    missaoText.classList.add("titleCardValores");
-    valoresText.classList.add("titleCardValores");
+      const text = document.createElement("p");
+      text.textContent = item.Texto;
+      text.classList.add("textCardValores");
 
-    visao.appendChild(visaoText);
-    missao.appendChild(missaoText);
-    valores.appendChild(valoresText);
+      card.append(emoji, title, line, text);
+      containerValores.appendChild(card);
+    });
 
   } catch (err) {
     console.error(err);
   }
 }
 
-renderValores("#app");
+//renderValores("#app");
 getDados();
 
 
@@ -81,21 +138,17 @@ document.addEventListener('DOMContentLoaded', () => {
 //Dinamização da seção da história
 
 async function getHistoria() {
-    try {
-        const resultado = await fetch("https://bjd9aof9.api.sanity.io/v2025-10-21/data/query/production?query=*%0A++%5B_type+%3D%3D+%27Historia%27%5D%0A%7B%0A++Titulo%2C%0A++++Texto%2C%0A++++%22Imagem%22+%3A+Imagem.asset-%3Eurl%0A%7D%0A%0A%0A%0A%0A&perspective=drafts", {
-            method: "GET",
-        })
-        console.log(resultado);
-        const dados = await resultado.json();
+  try {
+    const url = "https://bjd9aof9.api.sanity.io/v2025-10-21/data/query/production?query=*%5B_type%20%3D%3D%20'Historia'%5D%7B%0A%20%20Titulo%2C%0A%20%20Texto%2C%0A%20%20%22Imagem%22%3A%20Imagem.asset-%3Eurl%0A%7D&perspective=drafts";
+    const response = await fetch(url);
+    const data = await response.json();
 
-        console.log(dados.result);
-  const item = (dados && Array.isArray(dados.result) && dados.result[0]) || null;
+    const item = Array.isArray(data.result) ? data.result[0] : null;
     if (!item) {
-      console.warn("Sem conteúdo em Historia.");
+      console.warn("⚠️ Nenhum conteúdo encontrado em 'Historia'.");
       return;
     }
 
-    // <section id="historia" class="historia">
     const section = document.createElement("section");
     section.id = "historia";
     section.classList.add("historia");
@@ -106,35 +159,32 @@ async function getHistoria() {
     const texto = document.createElement("div");
     texto.classList.add("historia-texto");
 
-    // Título
     const h2 = document.createElement("h2");
-    h2.textContent = item.Titulo || "";
+    h2.textContent = item.Titulo || "Nossa História";
     texto.appendChild(h2);
 
-    // Parágrafos (quebra por ponto, ?, ! — ignora vazios)
-    const frases = (item.Texto || "")
-      .split(/[.!?]+/g)
+    const paragrafos = (item.Texto || "")
+      .split(/[.!?]+/)
       .map(s => s.trim())
       .filter(Boolean);
 
-    frases.forEach(f => {
+    paragrafos.forEach(f => {
       const p = document.createElement("p");
       p.textContent = f + ".";
       texto.appendChild(p);
     });
 
-    // Imagem
     const figure = document.createElement("figure");
     figure.classList.add("historia-imagem");
+
     const img = document.createElement("img");
     img.src = item.Imagem || "";
-    img.alt = item.Titulo || "Imagem da seção história";
+    img.alt = item.Titulo || "Imagem da seção História";
     img.loading = "lazy";
     figure.appendChild(img);
 
     container.append(texto, figure);
     section.appendChild(container);
-
 
     const mount = document.querySelector("#historia-root");
     if (mount) {
@@ -143,10 +193,9 @@ async function getHistoria() {
     } else {
       document.body.appendChild(section);
     }
-
-    } catch (err) {
-        console.error(err);
-    }
+  } catch (err) {
+    console.error("Erro ao carregar a seção História:", err);
   }
+}
 
 getHistoria();

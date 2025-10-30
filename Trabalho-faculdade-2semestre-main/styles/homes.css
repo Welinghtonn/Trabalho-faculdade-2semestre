@@ -84,7 +84,7 @@ nav a{
 
     height: 100vh;
     width: 100%;
-    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(../assets/backgroundHome01.jpg);
+    /* background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(../assets/backgroundHome01.jpg); */
     background-size: cover;
     background-position: center;
 }
@@ -240,12 +240,21 @@ nav a{
     width: 100px;
 }
 
-.visao, .missao, .valores{
+.visao{
     font-family: "Montserrat", sans-serif;
     font-optical-sizing: auto;
     font-weight: 700;
     font-style: bold;
     font-size: 30px;
+}
+
+.textCardValores{
+  font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: bold;
+    font-size: 28px;
+    text-align: center;
 }
 
 .lineCardValores{
