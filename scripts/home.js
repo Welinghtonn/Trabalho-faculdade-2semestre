@@ -1,5 +1,24 @@
 const loader = document.getElementById("loader")
 
+//hambuerguer//
+
+const hamburguer = document.getElementById("hamburguer");
+const menuLateral = document.getElementById("menu-lateral");
+
+if (hamburguer && menuLateral) {
+  hamburguer.addEventListener("click", () => {
+    hamburguer.classList.toggle("ativo");
+    menuLateral.classList.toggle("ativo");
+  });
+  
+  document.querySelectorAll(".menu-lateral a").forEach(link => {
+    link.addEventListener("click", () => {
+      hamburguer.classList.remove("ativo");
+      menuLateral.classList.remove("ativo");
+    });
+  });
+}
+
 async function getDados() {
     try {
         const resultado = await fetch("https://bjd9aof9.api.sanity.io/v2025-10-21/data/query/production?query=*%0A++%5B_type+%3D%3D+%27Valores%27%5D%0A%7B%0A++%22Emoji%22+%3A+Emoji.asset+-%3Eurl%2C%0A++++Titulo%2C%0A++++Texto%0A%7D%0A%0A%0A%0A&perspective=drafts ", {

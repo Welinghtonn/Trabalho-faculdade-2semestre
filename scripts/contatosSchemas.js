@@ -1,6 +1,25 @@
 
 const loader = document.getElementById("loader")
 
+//hambuerguer//
+
+const hamburguer = document.getElementById("hamburguer");
+const menuLateral = document.getElementById("menu-lateral");
+
+if (hamburguer && menuLateral) {
+  hamburguer.addEventListener("click", () => {
+    hamburguer.classList.toggle("ativo");
+    menuLateral.classList.toggle("ativo");
+  });
+  
+  document.querySelectorAll(".menu-lateral a").forEach(link => {
+    link.addEventListener("click", () => {
+      hamburguer.classList.remove("ativo");
+      menuLateral.classList.remove("ativo");
+    });
+  });
+}
+
 async function getLocalização(){
     try{
         const resultado = await fetch("https://bjd9aof9.api.sanity.io/v2025-11-04/data/query/production?query=*%0A++%5B_type+%3D%3D+%27Localizacao%27%5D%0A%7B%0A++Rua%2C+%0A++++Bairro%2C%0A++++Cidade%0A%7D%0A%0A%0A%0A%0A%0A%0A%0A%0A%0A&perspective=drafts", {

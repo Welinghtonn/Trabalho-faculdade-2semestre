@@ -1,5 +1,24 @@
 
-  const loader = document.getElementById("loader")
+const loader = document.getElementById("loader")
+
+//hambuerguer//
+
+const hamburguer = document.getElementById("hamburguer");
+const menuLateral = document.getElementById("menu-lateral");
+
+if (hamburguer && menuLateral) {
+  hamburguer.addEventListener("click", () => {
+    hamburguer.classList.toggle("ativo");
+    menuLateral.classList.toggle("ativo");
+  });
+
+  document.querySelectorAll(".menu-lateral a").forEach(link => {
+    link.addEventListener("click", () => {
+      hamburguer.classList.remove("ativo");
+      menuLateral.classList.remove("ativo");
+    });
+  });
+}
 
 
 async function getNoticias() {

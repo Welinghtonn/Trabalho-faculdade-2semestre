@@ -1,6 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
 
 * {
     box-sizing: border-box;
@@ -32,7 +32,7 @@ body {
 
 .spinner {
     border: 6px solid #ddd;
-    border-top: 6px solid  rgba(102, 205, 170, 1);
+    border-top: 6px solid rgba(102, 205, 170, 1);
     border-radius: 50%;
     width: 50px;
     height: 50px;
@@ -46,7 +46,6 @@ body {
     }
 }
 
-
 header {
     display: flex;
     align-items: center;
@@ -56,7 +55,6 @@ header {
     position: absolute;
     width: 100%;
 }
-
 
 .logo {
     width: 290px;
@@ -87,7 +85,6 @@ nav p {
 nav a {
     text-decoration: none;
     color: white;
-
 }
 
 nav p:hover {
@@ -95,17 +92,16 @@ nav p:hover {
     transform: scale(1.02);
 }
 
-.containerLogo a{
+.containerLogo a {
     cursor: pointer;
 }
-
 
 .buttonCliente {
     border: none;
     padding: 11px 23px;
     border-radius: 21px;
 
-    color: #39C2C6;
+    color: #39c2c6;
     background-color: white;
     box-shadow: rgba(0, 0, 0, 0.3) 0px 2.5px 2px;
 
@@ -119,8 +115,103 @@ nav p:hover {
 }
 
 .buttonCliente a {
-    color: #39C2C6;
+    color: #39c2c6;
     text-decoration: none;
+}
+
+.hamburguer {
+    width: 35px;
+    height: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+    z-index: 9999;
+    position: relative;
+}
+
+.hamburguer .bar {
+    width: 100%;
+    height: 4px;
+    background: #ffffff;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+.hamburguer.ativo .bar:nth-child(1) {
+    transform: translateY(10px) rotate(45deg);
+    background-color: #000;
+    z-index: 9999;
+}
+
+.hamburguer.ativo .bar:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburguer.ativo .bar:nth-child(3) {
+    transform: translateY(-11px) rotate(-45deg);
+    background-color: #000;
+    z-index: 9999;
+}
+
+.menu-lateral {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 290px;
+    height: 55vh;
+    background: #fff;
+    box-shadow: -4px 0 10px rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+    z-index: 999;
+}
+
+.menu-lateral.ativo {
+    right: 0;
+}
+
+.menu-lateral ul {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    list-style: none;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    margin-top: 118px;
+}
+
+.menu-lateral ul li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 2px solid #ccc;
+    width: 100%;
+    height: 60px;
+}
+
+.menu-lateral ul li a {
+    text-decoration: none;
+    color: #000;
+    font-size: 1.1rem;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 1100px) {
+    .menu-lateral {
+        display: flex;
+    }
+}
+
+@media screen and (min-width: 1101px) {
+    .hamburguer {
+        display: none;
+    }
+
+    .menu-lateral {
+        display: none;
+    }
 }
 
 .bgHome01 {
@@ -130,7 +221,8 @@ nav p:hover {
 
     height: 120vh;
     width: 100%;
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(../assets/backgroundHome01.jpg);
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+        url(../assets/backgroundHome01.jpg);
     background-size: cover;
     background-position: center;
 }
@@ -168,7 +260,6 @@ nav p:hover {
     font-optical-sizing: auto;
     font-weight: 700;
     font-style: bold;
-
 }
 
 .textCard {
@@ -193,7 +284,7 @@ nav p:hover {
     border-radius: 31px;
 
     color: #fff;
-    background-color: #66CDAA;
+    background-color: #66cdaa;
     box-shadow: rgba(0, 0, 0, 0.3) 0px 2.5px 2px;
 
     font-family: "Inter", sans-serif;
@@ -203,7 +294,6 @@ nav p:hover {
     font-size: 20px;
 
     cursor: pointer;
-
 }
 
 .buttonWats {
@@ -325,8 +415,6 @@ nav p:hover {
     box-sizing: border-box;
 }
 
-
-
 :root {
     --img-w: 430px;
     --col-gap: 36px;
@@ -345,14 +433,13 @@ nav p:hover {
     margin-top: 12px;
 }
 
-
 .sidebar .tab {
     appearance: none;
     border: 0;
     padding: 10px 16px;
     border-radius: 12px;
     text-align: center;
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
 
     background: transparent;
     font-weight: 600;
@@ -374,12 +461,11 @@ nav p:hover {
     color: #fff;
 }
 
-
 .conteudo-servico {
     margin-left: 0;
     padding-left: 0;
     flex: 1;
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
     max-width: 980px;
 }
 
@@ -431,7 +517,7 @@ nav p:hover {
     height: 270px;
     object-fit: cover;
     border-radius: 16px;
-    box-shadow: 0 10px 24px rgba(0, 0, 0, .06);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06);
 }
 
 .btn-orcamento {
@@ -450,7 +536,7 @@ nav p:hover {
 }
 
 .btn-orcamento:hover {
-    filter: brightness(.95);
+    filter: brightness(0.95);
 }
 
 .texto {
@@ -471,7 +557,6 @@ nav p:hover {
 .texto ul {
     margin-left: 18px;
 }
-
 
 .swiper {
     position: relative;
@@ -504,7 +589,6 @@ nav p:hover {
     text-decoration-color: #000;
 }
 
-
 .swiper-button-prev {
     left: calc(var(--img-w) + var(--col-gap) + 8px);
 }
@@ -517,7 +601,7 @@ nav p:hover {
     width: 6px;
     height: 6px;
     background: #000;
-    opacity: .2;
+    opacity: 0.2;
     margin: 0 6px !important;
 }
 
@@ -549,7 +633,6 @@ nav p:hover {
     font-family: "Inter", sans-serif;
     font-weight: 300;
     font-size: 18px;
-    ;
 }
 
 strong {
@@ -626,6 +709,7 @@ strong {
     width: 100vw;
     padding-right: 0;
     box-sizing: border-box;
+    max-width: 1280px;
 }
 
 .historia-texto {
@@ -674,9 +758,8 @@ strong {
     margin-right: 0;
 }
 
-
 .footer {
-    background-color: #66CDAA;
+    background-color: #66cdaa;
     /* Cor de fundo verde-água */
     color: white;
     /* Cor do texto branca */
@@ -721,7 +804,7 @@ strong {
 }
 
 .footer-content button {
-    background-color: #66CDAA;
+    background-color: #66cdaa;
     /* Cor de fundo do botão */
     color: white;
     /* Cor do texto do botão */
@@ -758,4 +841,175 @@ strong {
     /* Tamanho do texto */
     padding: 20px 0;
     /* Espaçamento interno */
+}
+
+@media (max-width: 1200px) {
+    .footer-content h1 {
+        font-size: 19px;
+    }
+
+    .footer-content p {
+        font-size: 10px;
+    }
+
+    .footer-content img {
+        width: 30px;
+    }
+}
+
+@media (max-width: 900px) {
+    .footer-content {
+        justify-content: space-between;
+        padding: 0;
+    }
+}
+
+#historia {
+    width: 100%;
+    min-height: auto;
+    padding: 100px 20px;
+    background-color: #fff;
+    font-family: "Montserrat", sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.historia-texto {
+    flex: 1 1 500px;
+    max-width: 600px;
+}
+
+.historia-texto h2 {
+    font-size: 34px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.historia-texto p {
+    font-size: 20px;
+    line-height: 1.6;
+    margin-bottom: 16px;
+}
+
+.historia-imagem img {
+    width: 100%;
+    max-width: 520px;
+    border-radius: 14px;
+    object-fit: cover;
+}
+
+@media (max-width: 1100px) {
+    #servicos-root .servicos {
+        flex-direction: column;
+        gap: 40px;
+        padding: 0 20px;
+        margin: 10px 0;
+    }
+
+    .sidebar {
+        flex-direction: row;
+        gap: 10px;
+        padding-right: 0;
+        border-right: none;
+        overflow-x: auto;
+        padding-bottom: 10px;
+        width: 88%;
+        height: 60px;
+    }
+
+    .sidebar .tab {
+        white-space: nowrap;
+        padding: 10px 14px;
+    }
+
+    .card-servico {
+        flex-direction: column;
+        gap: 22px;
+        align-items: center;
+    }
+
+    .card-servico img {
+        width: 100%;
+        max-width: 620px;
+        height: auto;
+    }
+
+    .swiper-button-prev {
+        left: 10px;
+    }
+
+    .swiper-button-next {
+        right: 10px;
+    }
+
+    .swiper-pagination {
+        bottom: 8px !important;
+        text-align: center;
+    }
+
+    #historia {
+        height: 170vh;
+        padding: 80px 20px;
+    }
+
+    .historia-container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .historia-texto {
+        max-width: 90%;
+    }
+
+    .historia-texto p {
+        text-align: justify;
+    }
+}
+
+@media screen and (max-width: 1375px) {
+    .bgHome02 {
+        height: auto;
+        padding: 20px 0;
+    }
+
+    .containerCardValores {
+        flex-wrap: wrap;
+    }
+}
+
+@media screen and (max-width: 1230px) {
+    nav {
+        justify-content: center;
+        gap: 20px;
+        font-size: 19px;
+        width: 500px;
+    }
+
+    .buttonCliente {
+        width: 230px;
+    }
+}
+
+@media screen and (max-width: 1100px) {
+    header {
+        justify-content: space-between;
+        padding: 0 30px;
+    }
+
+    nav {
+        display: none;
+    }
+
+    .buttonCliente {
+        display: none;
+    }
+
+    .hamburguer {
+        display: flex;
+    }
+
+    .menu-lateral {
+        display: flex;
+    }
 }
